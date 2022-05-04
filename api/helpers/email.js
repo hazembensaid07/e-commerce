@@ -1,6 +1,6 @@
 // /helpers/email.js
 const nodeMailer = require("nodemailer");
- 
+
 exports.sendEmailWithNodemailer = (req, res, emailData) => {
   const transporter = nodeMailer.createTransport({
     host: "smtp.gmail.com",
@@ -8,14 +8,14 @@ exports.sendEmailWithNodemailer = (req, res, emailData) => {
     secure: false,
     requireTLS: true,
     auth: {
-      user: "rayene.bendhief@gmail.com", // MAKE SURE THIS EMAIL IS YOUR GMAIL FOR WHICH YOU GENERATED APP PASSWORD
-      pass: "yxwsziyxgygmvtpz", // MAKE SURE THIS PASSWORD IS YOUR GMAIL APP PASSWORD WHICH YOU GENERATED EARLIER
+      user: process.env.email, // MAKE SURE THIS EMAIL IS YOUR GMAIL FOR WHICH YOU GENERATED APP PASSWORD
+      pass: process.env.pass, // MAKE SURE THIS PASSWORD IS YOUR GMAIL APP PASSWORD WHICH YOU GENERATED EARLIER
     },
     tls: {
       ciphers: "SSLv3",
     },
   });
- 
+
   return transporter
     .sendMail(emailData)
     .then((info) => {
